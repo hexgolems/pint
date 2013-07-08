@@ -1,0 +1,9 @@
+*.swp
+*.un~
+*.o
+*.a
+*.so
+a.out
+output
+lua
+pin
