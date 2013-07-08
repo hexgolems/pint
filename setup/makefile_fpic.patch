@@ -1,0 +1,19 @@
+*** Makefile	2013-02-26 16:21:37.611830136 +0100
+--- Makefile	2013-02-26 16:21:32.595805250 +0100
+***************
+*** 8,14 ****
+  PLAT= none
+  
+  CC= gcc
+! CFLAGS= -O2 -Wall $(MYCFLAGS)
+  AR= ar rcu
+  RANLIB= ranlib
+  RM= rm -f
+--- 8,14 ----
+  PLAT= none
+  
+  CC= gcc
+! CFLAGS= -O2 -Wall -fPIC $(MYCFLAGS)
+  AR= ar rcu
+  RANLIB= ranlib
+  RM= rm -f

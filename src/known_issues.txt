@@ -1,0 +1,3 @@
+TODO buffer pool Instrumentation callbacks leak memory via the buffer that is not removed when the callbacks trace is invalidated
+TODO replace lua_tostring(L,x) with lua_get_string()
+TODO add wrapper for instrumentation type creation

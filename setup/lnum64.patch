@@ -1,0 +1,20 @@
+*** luaconf.h	2013-02-26 15:51:19.638815299 +0100
+--- luaconf.h	2013-02-26 15:51:49.694964327 +0100
+***************
+*** 63,69 ****
+  	"./?.so;"  LUA_CDIR"?.so;" LUA_CDIR"loadall.so"
+  #endif
+  
+! 
+  /*
+  @@ LNUM_DOUBLE | LNUM_FLOAT | LNUM_LDOUBLE: Generic Lua number mode
+  @@ LNUM_INT32 | LNUM_INT64: Integer type (optional)
+--- 63,70 ----
+    "./?.so;"  LUA_CDIR"?.so;" LUA_CDIR"loadall.so"
+  #endif
+  
+! #define LNUM_DOUBLE
+! #define LNUM_INT64
+  /*
+  @@ LNUM_DOUBLE | LNUM_FLOAT | LNUM_LDOUBLE: Generic Lua number mode
+  @@ LNUM_INT32 | LNUM_INT64: Integer type (optional)
