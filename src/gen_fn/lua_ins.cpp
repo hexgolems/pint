@@ -42,6 +42,8 @@ int luaopen_ins (lua_State *L) {
   luaL_openlib(L, "Ins", ins_lib, 0);
   return 1;
 }
+
+#ifdef TARGET_IA32E
 int ins_has_property (lua_State *L) {
   INS* v1 = check_ins(L,1);
   INS_PROP v2 = lua_tonumber(L,2);
@@ -49,6 +51,8 @@ int ins_has_property (lua_State *L) {
   lua_pushboolean(L, r);
   return 1;
 }
+#endif
+
 int ins_operand_memory_scale (lua_State *L) {
   INS* v1 = check_ins(L,1);
   UINT32 v2 = lua_tonumber(L,2);

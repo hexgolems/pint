@@ -1,0 +1,28 @@
+--- lcode.c	2013-09-09 17:24:22.494835000 +0200
++++ lcode_patched.c	2013-09-09 17:28:30.510460000 +0200
+@@ -234,6 +234,7 @@
+ static int addk (FuncState *fs, TValue *k, TValue *v) {
+   lua_State *L = fs->L;
+   TValue *idx = luaH_set(L, fs->h, k);
++  int i;
+ #ifdef LUA_TINT
+   /* Note: Integer-valued LUA_TNUMBER's are handled as in unpatched Lua (below)
+   */
+@@ -241,7 +242,7 @@
+ # ifdef LNUM_INT64
+     lua_assert( (int)ivalue(idx) == ivalue(idx) );  /* make sure no data is lost in the casting */
+ # endif
+-    int i= (int)ivalue(idx);
++    i= (int)ivalue(idx);
+     lua_assert(luaO_rawequalObj(&fs->f->k[i], v));
+     return i;
+   }
+@@ -249,7 +250,7 @@
+ #else
+   if (ttisnumber(idx)) {
+ #endif
+-    int i= cast_int(nvalue_fast(idx));
++    i= cast_int(nvalue_fast(idx));
+     lua_assert(luaO_rawequalObj(&fs->f->k[i], v));
+     return i;
+   }

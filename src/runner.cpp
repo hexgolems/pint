@@ -32,9 +32,10 @@ int main(int argc, char * argv[])
     if (PIN_Init(argc, argv)) return Usage();
 
     PIN_AddFiniFunction(Finish, 0);
-
+    printf("setting up lua\n");
     lua.setup();
 
+    printf("running host\n");
     PIN_InitSymbols();
     PIN_StartProgram();
 

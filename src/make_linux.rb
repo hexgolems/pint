@@ -84,8 +84,16 @@ def run
 end
 
 def setup
+  deps = %w{libreadline-dev lib32ncurses5-dev lib32stdc++6 g++}
+  puts "I'm going to install the following dependencies, you will need sudo for that"
+  puts deps
+  puts "Do you want me to do that? y/N"
+  if STDIN.gets =~/y/
+   sh("sudo apt-get install #{deps.join(" ")}")
+  end
   sh("sh", "./setup/setup_pin.sh")
   sh("sh", "./setup/setup_lua.sh")
+  sh("rm","-r", "output")
   sh("mkdir","output")
   build
   run

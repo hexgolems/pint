@@ -14,7 +14,11 @@ extern "C" {
 int INS_to_lua(lua_State *L, INS ins);
   INS *check_ins (lua_State *L, int);
 int luaopen_ins (lua_State *L);
+
+#ifdef TARGET_IA32E
 int ins_has_property (lua_State *L) ;
+#endif
+
 int ins_operand_memory_scale (lua_State *L) ;
 int ins_is_mask_mov (lua_State *L) ;
 int ins_is_i_ret (lua_State *L) ;
@@ -133,7 +137,9 @@ int ins_is_ret (lua_State *L) ;
 
 const struct luaL_reg ins_lib_m [] = {
   {"add_callback",add_ins_call},
+  #ifdef TARGET_IA32E
   {"has_property",ins_has_property},
+  #endif
   {"operand_memory_scale",ins_operand_memory_scale},
   {"is_mask_mov",ins_is_mask_mov},
   {"is_i_ret",ins_is_i_ret},
@@ -253,7 +259,9 @@ const struct luaL_reg ins_lib_m [] = {
 };
 
 const struct luaL_reg ins_lib [] = {
+  #ifdef TARGET_IA32E
     {"has_property",ins_has_property},
+  #endif
   {"operand_memory_scale",ins_operand_memory_scale},
   {"is_mask_mov",ins_is_mask_mov},
   {"is_i_ret",ins_is_i_ret},

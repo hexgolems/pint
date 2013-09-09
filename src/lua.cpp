@@ -14,6 +14,10 @@
 #include "gen_fn/lua_sym.h"
 #include "gen_fn/lua_trace.h"
 
+#ifdef linux
+  #include "unistd.h"
+#endif
+
 #include "gen_fn/lua_ins_instr.h"
 
 #include "wrapped_callbacks.h"
@@ -47,11 +51,17 @@ extern "C" {
 
   void Lua::setup(){
 
+#ifdef linux
     lua_std_in = fdopen(dup(STDIN_FILENO), "r");
     lua_std_out = fdopen(dup(STDOUT_FILENO), "a");
     lua_std_err = fdopen(dup(STDERR_FILENO), "a");
 
+
     fprintf(lua_std_err,"-- Loading Lua libs\n");
+#else
+    printf("-- Loading Lua libs\n");
+#endif
+
     std::string file ="src/test.lua";
     luaL_openlibs(L);
     
@@ -61,8 +71,11 @@ extern "C" {
     }
 
     lua_register(L, "add_ins_callback", add_ins_call);
-
+#ifdef linux
     fprintf(lua_std_err,"-- Loading file: %s \n",file.c_str());
+#else
+    printf("-- Loading file: %s \n",file.c_str());
+#endif
 
     lua_getglobal(L, "debug"); //addes debug backtrace as formater for errors
     lua_getfield(L, -1, "traceback"); 
@@ -76,29 +89,41 @@ extern "C" {
 
   void Lua::done(int exitstatus){
 
+#ifdef linux
     fflush(stdin);
     fflush(stdout);
     fflush(stderr);
     dup2(fileno(lua_std_in),STDIN_FILENO); //this stuff recovers stdin/stdout/stderr after the instrumentated process closed them
     dup2(fileno(lua_std_out),STDOUT_FILENO);
     dup2(fileno(lua_std_err),STDERR_FILENO);
+#else
+    freopen ("closing_log_stdout.txt","w",stdout);
+    freopen ("closing_log_stderr.txt","w",stderr);
+    fprintf(stderr,"error output:\n");
+    printf("std output:\n");
+#endif
 
     luaopen_debug(L);
 
     //lua_pushcfunction(L, errorHandler);
-    
     lua_getglobal(L, "debug"); //addes debug backtrace as formater for errors
     lua_getfield(L, -1, "traceback"); 
 
     lua_getglobal(L, "at_exit");
     lua_pushnumber(L, exitstatus);
     report_errors(lua_pcall(L, 1, 0, -3)); // last -3 = debug.backtrace is used as error function
+    fclose(stdout);
+    fclose(stderr);
   }
 
   void Lua::report_errors(int status)
   {
     if ( status!=0 ) {
+      #ifdef linux
       fprintf(lua_std_out,"--* %s\n", lua_tostring(L, -1));
+      #else
+      fprintf(stdout,"--* %s\n", lua_tostring(L, -1));
+      #endif
       lua_pop(L, 1); // remove error message
     }
   }

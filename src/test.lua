@@ -1,11 +1,15 @@
 require("src.lib")
-
+print("hallo world from lua\n")
 stack = {"begin"}
 calls ={}
 names ={ begin = "START"}
+call_counter = {}
 
-function callback_ret()
-	table.remove(stack,#stack)
+function callback_ret(addr)
+	img = Img.find_by_address(addr)
+	if img and img:is_main_executable() then
+		table.remove(stack,#stack)
+	end
 end
 
 function get_function_name(addr)
@@ -14,17 +18,22 @@ function get_function_name(addr)
 end
 
 function callback_call(addr)
-	get_function_name(addr)
-	current = stack[#stack]
-	if calls[current] == nil then calls[current]={} end
-	if calls[addr] == nil then calls[addr]={} end 
-	if calls[current][addr] == nil then calls[current][addr]=0 end
-	calls[current][addr]= calls[current][addr]+1
-	table.insert(stack,addr)
+	img = Img.find_by_address(addr)
+	if img and img:is_main_executable() then
+		call_counter[addr] = call_counter[addr] or 0
+		call_counter[addr] = call_counter[addr] + 1
+		current = stack[#stack]
+		current = current or 0
+		calls[current] = calls[current] or {}
+		if calls[addr] == nil then calls[addr]={} end 
+		if calls[current][addr] == nil then calls[current][addr]=0 end
+		calls[current][addr]= calls[current][addr]+1
+		table.insert(stack,addr)
+	end
 end
 
 tcall = TypedCallback.new("IARG_BRANCH_TARGET_ADDR",callback_call)
-rcall = TypedCallback.new(callback_ret)
+rcall = TypedCallback.new("IARG_BRANCH_TARGET_ADDR",callback_ret)
 
 function callback_ins(ins)
 		if ins:is_call() then
@@ -38,6 +47,10 @@ end
 CB.instruction(callback_ins)
 
 function at_exit(status)
+	for addr, ctr in pairs(call_counter) do
+		print("called", addr, ctr, "times")
+	end
+
 	local file = io.open("example.txt", "w")
 	file:write("digraph g {\n")
 	file:write("splines=true; \n sep=\"+10,10\";\n overlap=scalexy;\n nodesep=0.6;\n")
@@ -64,3 +77,5 @@ function at_exit(status)
 	file:close()
 	os.execute("dot -Tsvg example.txt -o call_graph.svg")
 end
+
+print("end of lua script\n")
