@@ -52,9 +52,9 @@ extern "C" {
     lua_std_err = fdopen(dup(STDERR_FILENO), "a");
 
     fprintf(lua_std_err,"-- Loading Lua libs\n");
-    std::string file ="src/test.lua";
+    std::string file ="tools/test.lua";
     luaL_openlibs(L);
-    
+
     open_all();
     if(lua_cpcall(L,init_callback_table,0) != 0) {
       lua_error(L);
@@ -65,7 +65,7 @@ extern "C" {
     fprintf(lua_std_err,"-- Loading file: %s \n",file.c_str());
 
     lua_getglobal(L, "debug"); //addes debug backtrace as formater for errors
-    lua_getfield(L, -1, "traceback"); 
+    lua_getfield(L, -1, "traceback");
     int s = luaL_loadfile(L, file.c_str());
     if ( s==0 ) {
       s = lua_pcall(L, 0, LUA_MULTRET, -2); // LAST 0 is the traceback
@@ -86,9 +86,9 @@ extern "C" {
     luaopen_debug(L);
 
     //lua_pushcfunction(L, errorHandler);
-    
+
     lua_getglobal(L, "debug"); //addes debug backtrace as formater for errors
-    lua_getfield(L, -1, "traceback"); 
+    lua_getfield(L, -1, "traceback");
 
     lua_getglobal(L, "at_exit");
     lua_pushnumber(L, exitstatus);

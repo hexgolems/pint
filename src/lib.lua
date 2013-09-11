@@ -6,18 +6,6 @@ function hex(num)
 	return string.format("%x",num)
 end
 
-
-
-local function csplit(str,sep)
-	local ret={}
-	local n=1
-	for w in str:gmatch("([^"..sep.."]*)") do
-		ret[n]=ret[n] or w -- only set once (so the blank after a string is ignored)
-		if w=="" then n=n+1 end -- step forwards on a blank but not a string
-	end
-	return ret
-end
-
 function get_addr_repr(addr)
 
 	if addr == "begin" then
@@ -42,8 +30,7 @@ function get_addr_repr(addr)
 
 	local func_name = Rtn.find_name_by_address(addr)
 	local img_name = img:name()
-	local path = csplit(img_name,"/")
-	local file_name = path[#path]
+	local _,_,file_name = string.find(img_name, "/([^/]*)$") 
 	local sec_name = sec:name()
 	if func_name and func_name ~= sec_name then
 		return file_name..sec_name.."."..func_name
