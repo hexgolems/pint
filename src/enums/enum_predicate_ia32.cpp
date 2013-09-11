@@ -1,6 +1,6 @@
 #include "pin.H"
 extern "C" {
-#include "lua.h"
+#include <lua.h>
 }
 #include <map>
 using namespace std;

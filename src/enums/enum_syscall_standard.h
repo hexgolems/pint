@@ -1,7 +1,7 @@
 #ifndef __PINT_ENUM_SYSCALL_STANDARD__
 #define __PINT_ENUM_SYSCALL_STANDARD__
 extern "C" {
-#include "lua.h"
+#include <lua.h>
 }
 #include "pin.H"
 SYSCALL_STANDARD lookup_string_to_syscall_standard(lua_State* L,string str);
