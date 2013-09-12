@@ -9,7 +9,7 @@ extern "C" {
 }
 
 #include "pin.H"
-#include "lua_ins_instr.h"
+#include "lua_instrumentation_calls.h"
 
 int INS_to_lua(lua_State *L, INS ins);
   INS *check_ins (lua_State *L, int);

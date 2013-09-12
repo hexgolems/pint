@@ -18,7 +18,6 @@
 #ifdef linux
   #include "unistd.h"
 #endif
-#include "gen_fn/lua_ins_instr.h"
 
 #include "wrapped_callbacks.h"
 #include "gen_fn/lua_typed_callback.h"

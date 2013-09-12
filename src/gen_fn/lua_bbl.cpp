@@ -51,62 +51,66 @@ BBL *check_bbl (lua_State *L, int pos) {
 
 int luaopen_bbl (lua_State *L) {
   luaL_newmetatable(L, "pin.Bbl");
+  lua_pushstring(L, "__index");
+  lua_pushvalue(L, -2);  /* pushes the metatable */
+  lua_settable(L, -3);  /* metatable.__index = metatable */
+  luaL_openlib(L, NULL, bbl_lib_m, 0);
   luaL_openlib(L, "Bbl", bbl_lib, 0);
   return 1;
 }
-int bbl_has_fall_through (lua_State *L) { 
-	BBL* v1 = check_bbl(L,1);
-	BOOL r = BBL_HasFallThrough(*v1);
-	lua_pushboolean(L, r);
-	return 1;
+int bbl_has_fall_through (lua_State *L) {
+  BBL* v1 = check_bbl(L,1);
+  BOOL r = BBL_HasFallThrough(*v1);
+  lua_pushboolean(L, r);
+  return 1;
 }
-int bbl_next (lua_State *L) { 
-	BBL* v1 = check_bbl(L,1);
-	BBL_to_lua(L, BBL_Next(*v1));
-	return 1;
+int bbl_next (lua_State *L) {
+  BBL* v1 = check_bbl(L,1);
+  BBL_to_lua(L, BBL_Next(*v1));
+  return 1;
 }
-int bbl_size (lua_State *L) { 
-	BBL* v1 = check_bbl(L,1);
-	USIZE r = BBL_Size(*v1);
-	lua_pushnumber(L, r);
-	return 1;
+int bbl_size (lua_State *L) {
+  BBL* v1 = check_bbl(L,1);
+  USIZE r = BBL_Size(*v1);
+  lua_pushnumber(L, r);
+  return 1;
 }
-int bbl_ins_tail (lua_State *L) { 
-	BBL* v1 = check_bbl(L,1);
-	INS_to_lua(L, BBL_InsTail(*v1));
-	return 1;
+int bbl_ins_tail (lua_State *L) {
+  BBL* v1 = check_bbl(L,1);
+  INS_to_lua(L, BBL_InsTail(*v1));
+  return 1;
 }
-int bbl_address (lua_State *L) { 
-	BBL* v1 = check_bbl(L,1);
-	ADDRINT r = BBL_Address(*v1);
-	lua_pushnumber(L, r);
-	return 1;
+int bbl_address (lua_State *L) {
+  BBL* v1 = check_bbl(L,1);
+  ADDRINT r = BBL_Address(*v1);
+  lua_pushnumber(L, r);
+  return 1;
 }
-int bbl_original (lua_State *L) { 
-	BBL* v1 = check_bbl(L,1);
-	BOOL r = BBL_Original(*v1);
-	lua_pushboolean(L, r);
-	return 1;
+int bbl_original (lua_State *L) {
+  BBL* v1 = check_bbl(L,1);
+  BOOL r = BBL_Original(*v1);
+  lua_pushboolean(L, r);
+  return 1;
 }
-int bbl_num_ins (lua_State *L) { 
-	BBL* v1 = check_bbl(L,1);
-	UINT32 r = BBL_NumIns(*v1);
-	lua_pushnumber(L, r);
-	return 1;
+int bbl_num_ins (lua_State *L) {
+  BBL* v1 = check_bbl(L,1);
+  UINT32 r = BBL_NumIns(*v1);
+  lua_pushnumber(L, r);
+  return 1;
 }
-int bbl_move_all_attributes (lua_State *L) { 
-	BBL* v1 = check_bbl(L,1);
-	BBL* v2 = check_bbl(L,2);
-	 BBL_MoveAllAttributes(*v1,*v2);
-	return 0;
+int bbl_move_all_attributes (lua_State *L) {
+  BBL* v1 = check_bbl(L,1);
+  BBL* v2 = check_bbl(L,2);
+   BBL_MoveAllAttributes(*v1,*v2);
+  return 0;
 }
-int bbl_ins_head (lua_State *L) { 
-	BBL* v1 = check_bbl(L,1);
-	INS_to_lua(L, BBL_InsHead(*v1));
-	return 1;
+int bbl_ins_head (lua_State *L) {
+  BBL* v1 = check_bbl(L,1);
+  INS_to_lua(L, BBL_InsHead(*v1));
+  return 1;
 }
-int bbl_prev (lua_State *L) { 
-	BBL* v1 = check_bbl(L,1);
-	BBL_to_lua(L, BBL_Prev(*v1));
-	return 1;
+int bbl_prev (lua_State *L) {
+  BBL* v1 = check_bbl(L,1);
+  BBL_to_lua(L, BBL_Prev(*v1));
+  return 1;
 }
