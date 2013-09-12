@@ -1,4 +1,5 @@
 require("src.lib")
+
 print("hallo world from lua\n")
 stack = {"begin"}
 calls ={}
@@ -15,6 +16,14 @@ end
 function get_function_name(addr)
 	if names[addr] then return end
 	names[addr] = get_addr_repr(addr)
+end
+
+function test_read_mem()
+	local addr = 4199104
+	str = Helper.read_mem(addr,10)
+	print("reading",hex(addr),hex_str(str," "))
+	str = Helper.read_mem(0,10)
+	print("reading from 0 ",str)
 end
 
 function callback_call(addr)

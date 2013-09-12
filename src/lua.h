@@ -29,7 +29,7 @@ public:
     return L;
   }
 
-  void setup();
+  void setup(std::string scripn_file_name);
   void open_all();
   void done(int exitstatus);
 

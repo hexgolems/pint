@@ -13,6 +13,7 @@
 #include "gen_fn/lua_sec.h"
 #include "gen_fn/lua_sym.h"
 #include "gen_fn/lua_trace.h"
+#include "lib.h"
 
 #ifdef linux
   #include "unistd.h"
@@ -29,7 +30,6 @@ extern "C" {
 }
   void Lua::open_all(){
 
-
     luaopen_app(L);
     luaopen_bbl(L);
     luaopen_category(L);
@@ -44,11 +44,12 @@ extern "C" {
     luaopen_sym(L);
     luaopen_typed_callback(L);
     luaopen_trace(L);
+    luaopen_helper(L);
 
     luaopen_callbacks(L);
   }
 
-  void Lua::setup(){
+  void Lua::setup(std::string filename){
 
 #ifdef linux
     lua_std_in = fdopen(dup(STDIN_FILENO), "r");
@@ -59,9 +60,8 @@ extern "C" {
 #else
     printf("-- Loading Lua libs\n");
 #endif
-    std::string file ="tools/test.lua";
     luaL_openlibs(L);
-    
+
     open_all();
     if(lua_cpcall(L,init_callback_table,0) != 0) {
       lua_error(L);
@@ -70,14 +70,14 @@ extern "C" {
     lua_register(L, "add_ins_callback", add_ins_call);
 
 #ifdef linux
-    fprintf(lua_std_err,"-- Loading file: %s \n",file.c_str());
+    fprintf(lua_std_err,"-- Loading file: %s \n",filename.c_str());
 #else
-    printf("-- Loading file: %s \n",file.c_str());
+    printf("-- Loading file: %s \n",filename.c_str());
 #endif
 
     lua_getglobal(L, "debug"); //addes debug backtrace as formater for errors
-    lua_getfield(L, -1, "traceback"); 
-    int s = luaL_loadfile(L, file.c_str());
+    lua_getfield(L, -1, "traceback");
+    int s = luaL_loadfile(L, filename.c_str());
     if ( s==0 ) {
       s = lua_pcall(L, 0, LUA_MULTRET, -2); // LAST 0 is the traceback
     }
@@ -104,9 +104,9 @@ extern "C" {
     luaopen_debug(L);
 
     //lua_pushcfunction(L, errorHandler);
-    
+
     lua_getglobal(L, "debug"); //addes debug backtrace as formater for errors
-    lua_getfield(L, -1, "traceback"); 
+    lua_getfield(L, -1, "traceback");
 
     lua_getglobal(L, "at_exit");
     lua_pushnumber(L, exitstatus);

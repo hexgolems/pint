@@ -2,6 +2,16 @@
 io.write("Running pinrunner from ",_VERSION,"!\n")
 Pin.set_syntax_intel()
 
+
+function hex_str(str,spacer)
+  return (
+    string.gsub(str,"(.)",
+    	function (c)
+         return string.format("%02X%s",string.byte(c), spacer or "")
+        end)
+     )
+end
+
 function hex(num)
 	return string.format("%x",num)
 end
