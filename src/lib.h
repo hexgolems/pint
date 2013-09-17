@@ -6,6 +6,8 @@
 #else
 #endif
 
+#include <stdlib.h>
+
 extern "C" {
     #include <lua.h>
     #include <lauxlib.h>
@@ -13,45 +15,21 @@ extern "C" {
 }
 
 
-#ifdef linux
-int isValidMem(void *ptr, size_t size) {
-  int nullfd = open("/dev/random", O_WRONLY);
-  if (write(nullfd, ptr, size) < 0) {
-    close(nullfd);
-    return 0;
-  }
-  close(nullfd);
-  return -1;
-}
-#else
-int isValidMem(void *ptr, size_t size) {
-  return !isBadReadPtr(ptr,size);
-}
-#endif
-
-
-int readMemSafe (lua_State *L) {
-  void* ptr = (void*)lua_tointeger (L, 1);
-  size_t len = (size_t)lua_tointeger (L, 2);
-  if(isValidMem(ptr, len)){
-    lua_pushlstring(L, (char*)ptr, len);
-  }else {
-    lua_pushnil(L);
-  }
-  return 1;
-}
-
 int readMem(lua_State *L) {
   void* ptr = (void*)lua_tointeger (L, 1);
   size_t len = (size_t)lua_tointeger (L, 2);
-  lua_pushlstring(L, (char*)ptr, len);
+  char* buffer = (char*)malloc(len);
+  if(!buffer){lua_pushnil(L); return 1;}
+  size_t bytes_copied = PIN_SafeCopy(buffer, ptr, len);
+  if(bytes_copied == 0) {lua_pushnil(L); return 1;}
+  lua_pushlstring(L, (char*)ptr, bytes_copied);
+  free(buffer);
   return 1;
 }
 
 
 const struct luaL_reg helper_lib [] = {
-  {"read_mem_unsafe",readMem},
-  {"read_mem",readMemSafe},
+  {"read_mem",readMem},
   {NULL, NULL}
 };
 
