@@ -55,20 +55,20 @@ IARGLIST get_instrument_arglist(lua_State *L, int offset){
   LUA_CALLBACK*  cb = check_typed_callback(L,offset+1);
   IARGLIST_AddArguments(arglist, IARG_PTR, (void*)cb, IARG_END);
 
-  int lua_arg_index = offset+2;
-  for(vector<IARG_TYPE>::iterator itr = cb->arg_types->begin(); itr != cb->arg_types->end(); itr ++){
+  //int lua_arg_index = offset+2;
+  for(vector<IARG_TYPE>::iterator itr = cb->arg_types->begin(); itr != cb->arg_types->end(); ++itr){
     IARG_TYPE arg = *itr;
-    IARGLIST_AddArguments(arglist, arg, IARG_END); break;
+    IARGLIST_AddArguments(arglist, arg, IARG_END);
     switch(arg) {
       case IARG_ADDRINT:
       case IARG_UINT32:
-      IARGLIST_AddArguments(arglist, arg, lua_tonumber(L,lua_arg_index++), IARG_END); break;
+    //  IARGLIST_AddArguments(arglist, arg, lua_tonumber(L,lua_arg_index++), IARG_END); break;
       case IARG_BOOL:
-      IARGLIST_AddArguments(arglist, arg, lua_toboolean(L,lua_arg_index++), IARG_END); break;
+    //  IARGLIST_AddArguments(arglist, arg, lua_toboolean(L,lua_arg_index++), IARG_END); break;
       case IARG_PTR:
-        lua_pushstring(L,"cannot use IARG_PTR for callback currently");lua_error(L); break;
+    //    lua_pushstring(L,"cannot use IARG_PTR for callback currently");lua_error(L); break;
+      printf("FIX ME THIS IS GOING TO DIE CRASH OMG\n CORRUPED STACK");
       default: break;
-
     }
   }
   return arglist;
@@ -90,7 +90,8 @@ int instrument_lua_callback(lua_State *L){
     lua_error(L);
   }
 
-  for(vector<IARG_TYPE>::iterator itr = args->begin(); itr != args->end() ; itr++){ //WARNING THIS IGNORES THE DO NOT USE FOR IARG_LAST
+  for(vector<IARG_TYPE>::iterator itr = args->begin(); itr != args->end() ; itr++){ 
+    //WARNING THIS IGNORES THE DO NOT USE FOR IARG_LAST
       count ++;
       switch(*itr){
       case IARG_ADDRINT:
@@ -99,9 +100,9 @@ int instrument_lua_callback(lua_State *L){
       case IARG_MEMORYREAD_EA:
       case IARG_MEMORYREAD2_EA:
       case IARG_MEMORYWRITE_EA:
-      case IARG_BRANCH_TARGET_ADDR:
       case IARG_SYSARG_VALUE:
       case IARG_SYSRET_VALUE:
+      case IARG_BRANCH_TARGET_ADDR:
       case IARG_FALLTHROUGH_ADDR:
       case IARG_FUNCARG_CALLSITE_VALUE:
       case IARG_FUNCARG_ENTRYPOINT_VALUE:

@@ -41,7 +41,7 @@ function callback_call(addr)
 	end
 end
 
-tcall = TypedCallback.new("IARG_BRANCH_TARGET_ADDR",callback_call)
+tcall = TypedCallback.new("IARG_BRANCH_TARGET_ADDR","UINT32",1234,callback_call)
 rcall = TypedCallback.new("IARG_BRANCH_TARGET_ADDR",callback_ret)
 
 function callback_ins(ins)
