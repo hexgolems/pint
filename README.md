@@ -268,12 +268,17 @@ It will try to read `size` bytes begining from `addr`. It will return a string o
 
 Instrumentation Callbacks
 -------------------------
++ `CB.image_load(func)` registers `func` as a callback for every newly loaded image, func will be called with the newly loaded image as first argument.
++ `CB.image_unload(func)` registers `func` as a callback for every unloaded image, `func` will be called with the unloaded image as first argument.
++ `CB.instruction(func)` registers `func` as a callback for newly JITed Instruction, func will be called with the instruction as first argument.
++ `CB.routine(func)` registers `func` as a callback for newly JITed Routines, `func` will be called with the routine as frst argument.
++ `CB.trace(func)` registers `func` as a callback for newly JITed traces (e.g. a single entry multiple exit basic block) , `func` will be called with the trace as frst argument.
 
 In lib.lua
 ----------
 + `hex(int)` returns a the hex string representing the given integer
 + `hex_str(str,spacer)` returns a strign containing a hex dump of `str` with bytes seperated by `spacer`. If no spacer is given, the bytes are concatenated without any seperation.
-+ `get_addr_repr(addr)` Returns a string describing the function addr belogs to as `filename.section.function` or `filename.section.hex(addr)`
++ `get_addr_repr(addr)` Returns a string describing the function containing addr as `filename.section.function` or `filename.section.hex(addr)`
 
 Renamed Functions
 -----------------
