@@ -242,7 +242,7 @@ function at_exit(status)
 end
 
 print("end of lua script\n")
-'''
+```
 
 Additions To The API
 ========================
