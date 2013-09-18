@@ -2,10 +2,10 @@ PINT
 ====
 
 Pint is a PIN tool that exposes the PIN API to lua scripts.  Pint runs on 64
-bit linux and 32 bit windows XP, it should run on 32 bit linux and 64 bit XP as
+bit ubuntu and 32 bit windows XP, it should run on 32 bit ubuntu and 64 bit XP as
 well but this is yet untested.
 
-PIN is a dynmic instrumentation engine developed by intel. Basically, it is a
+PIN is a dynamic instrumentation engine developed by Intel. Basically, it is a
 JIT compiler for binaries. It will disassemble the binary, one basic block at a
 time, and recompile it with additional instructions inserted at arbitrary
 positions. Pint makes it possible to add lua code at this point.
@@ -33,7 +33,7 @@ You can then run your lua script with:
 `pin.exe -t runner.dll -s path/to/scrip -- binary_to_instrument.exe args for exe`
 
 
-Under Linux
+Under Ubuntu
 -----------
 Make sure you use ruby1.9 and have git installed and then run:
 
@@ -282,6 +282,6 @@ In lib.lua
 
 Renamed Functions
 -----------------
-+ `PIN_set_syntax_x_e_d` is called `Pin.set_syntax_xed`
-+ `PIN_set_syntax_a_t_t` is called `Pin.set_syntax_att`
++ `PIN_set_syntax_XED` is called `Pin.set_syntax_xed`
++ `PIN_set_syntax_ATT` is called `Pin.set_syntax_att`
 
