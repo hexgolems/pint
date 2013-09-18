@@ -145,7 +145,7 @@ Example: Extract Used Strings
 You have some binary and wonder "what strings does it use". Unfortunately, the `strings` util doesn't show any. Maybe the binary contains encrypted/ziped strings? This example shows a tool that will monitor byte size reads to the memory and log any string found. The setup is pretty much the same as in the previous example: There is a callback that gets called once for every new instruction. It checks if the instruction reads one byte from memory, if so an callback is added to this instruction. The callback will peek at the memory address read from, determine if there is a printable string at the given address and if so log the string and the current IP. During runtime, all newly encountered strings are printed to STDOUT, and a precise listing of (address, strings) strings pairs will be printed `at_exit`
 
 
-'''lua
+```lua
 require("src.lib")
 
 print("This tool will take some time")
