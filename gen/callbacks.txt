@@ -1,5 +1,0 @@
-IMG load IMG_AddInstrumentFunction
-IMG unload IMG_AddUnloadFunction
-INS instruction INS_AddInstrumentFunction
-RTN routine RTN_AddInstrumentFunction
-TRACE trace TRACE_AddInstrumentFunction
