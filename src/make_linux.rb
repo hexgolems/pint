@@ -89,24 +89,33 @@ def setup
   puts deps
   puts "Do you want me to do that? y/N"
   if STDIN.gets =~/y/
-   sh("sudo apt-get install #{deps.join(" ")}")
+    sh("sudo apt-get install #{deps.join(" ")}")
   end
   sh("sh", "./setup/setup_pin.sh")
   sh("sh", "./setup/setup_lua.sh")
-  sh("rm","-r", "output")
+  try_sh("rm","-r", "output")
   sh("mkdir","output")
   build
   run
 end
 
 def clean
-  sh("rm *.out")
+  sh("rm","-r","output")
 end
 
 def sh(*cmd)
   puts cmd.join(" ")
   system(*cmd)
-  exit $?.exitstatus unless $?.exitstatus == 0
+  unless $?.exitstatus == 0
+    puts "failed .. exiting"
+    exit $?.exitstatus 
+  end
+end
+
+def try_sh(*cmd)
+  puts cmd.join(" ")
+  system(*cmd)
+  puts "failed .. ignoring" unless $?.exitstatus == 0
 end
 
 if ARGV.length == 0
