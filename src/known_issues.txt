@@ -2,3 +2,5 @@ TODO buffer pool Instrumentation callbacks leak memory via the buffer that is no
 TODO replace lua_tostring(L,x) with lua_get_string()
 TODO add wrapper for instrumentation type creation
 TODO  make it possible to use IARG_UINT32 etc ( IARG_TYPE arg = lookup_string_to_iarg_type(L,lua_tostring(L,i)); in lua_typed_callback:46, 70) 
+
+TODO add proper windows IO for at_exit.
