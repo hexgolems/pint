@@ -48,7 +48,7 @@ build Pint. The final pintool is called `runner.so`.
 
 You can then run your lua script with:
 
-`./pin/pin  -injection child -t runner.dll -s path/to/scrip -- /path/to/binary_to_instrument args for prog`
+`./pin/pin  -injection child -t runner.so -s path/to/scrip -- /path/to/binary_to_instrument args for prog`
 
 
 Usage
