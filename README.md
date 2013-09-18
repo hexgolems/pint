@@ -3,7 +3,7 @@ PINT
 
 Pint is a PIN tool that exposes the PIN API to lua scripts.  Pint runs on 64
 bit linux and 32 bit windows XP, it should run on 32 bit linux and 64 bit XP as
-well but this is yes untested.
+well but this is yet untested.
 
 PIN is a dynmic instrumentation engine developed by intel. Basically, it is a
 JIT compiler for binaries. It will disassemble the binary, one basic block at a
