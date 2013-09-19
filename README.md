@@ -285,3 +285,12 @@ Renamed Functions
 + `PIN_set_syntax_XED` is called `Pin.set_syntax_xed`
 + `PIN_set_syntax_ATT` is called `Pin.set_syntax_att`
 
+
+Contributing
+============
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Added some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
