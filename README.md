@@ -189,7 +189,7 @@ strings = {}
 function read_string_from(addr)
 	local res = ""
 	local str = Helper.read_mem(addr,6)
-	if str and str:len() < 6 then return nil end
+	if str:len() < 6 then return nil end
 	while true do
 		if not is_printable(str) or res:len() > 64 then break end
 		res = res .. str
@@ -264,7 +264,7 @@ Read Memory
 -----------
 
 + `Helper.read_mem(addr,size)`
-It will try to read `size` bytes beginning from `addr`. It will return a string of length less then or equal to `size`. The string length will be shorter if some parts could not be read since no memory was mapped or other such errors. It will return nil if no bytes were read.
+It will try to read `size` bytes beginning from `addr`. It will return a string of length less then or equal to `size`. The string length will be shorter if some parts could not be read since no memory was mapped or other such errors. It will return a empty string if no bytes were read.
 
 Instrumentation Callbacks
 -------------------------

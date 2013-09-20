@@ -21,7 +21,6 @@ int readMem(lua_State *L) {
   char* buffer = (char*)malloc(len);
   if(!buffer){lua_pushnil(L); return 1;}
   size_t bytes_copied = PIN_SafeCopy(buffer, ptr, len);
-  if(bytes_copied == 0) {lua_pushnil(L); return 1;}
   lua_pushlstring(L, (char*)ptr, bytes_copied);
   free(buffer);
   return 1;
