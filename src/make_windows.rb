@@ -8,7 +8,7 @@ $name = "runner"
 $tool = $name
 $enums =Dir.glob("#{$src}/enums/*.cpp").map{|x| x.gsub(/(.cpp|#{$src}\/)/,"")}
 $fns =Dir.glob("#{$src}/gen_fn/*.cpp").map{|x| x.gsub(/(.cpp|#{$src}\/)/,"")}
-$files= %w{runner lua lua_callback pintool_defines}+$enums+$fns
+$files= %w{runner lua_class lua_callback pintool_defines}+$enums+$fns
 $pin_path="./pin/win/"
 $lua_path="./lua/"
 
