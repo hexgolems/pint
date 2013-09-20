@@ -11,8 +11,8 @@ $pin_path="./pin/"
 $lua_path="./lua/"
 $pin_include_paths = %w{InstLib source/include/pin source/include/pin/gen extras/components/include extras/xed2-intel64/include }
 
-$cc = "clang" #compiler
-$ll = "g++" #linker
+$cc = "clang++" #compiler
+$ll = "clang++" #linker
 
 $include_paths = $pin_include_paths.map{|p| $pin_path+p}+[$lua_path+"include"]+%w{src}
 
@@ -84,7 +84,7 @@ def run
 end
 
 def setup
-  deps = %w{libreadline-dev lib32ncurses5-dev lib32stdc++6 g++ clang}
+  deps = %w{libreadline-dev lib32ncurses5-dev lib32stdc++6 clang}
   puts "I'm going to install the following dependencies, you will need sudo for that"
   puts deps
   puts "Do you want me to do that? y/N"
@@ -108,7 +108,7 @@ def sh(*cmd)
   system(*cmd)
   unless $?.exitstatus == 0
     puts "failed .. exiting"
-    exit $?.exitstatus 
+    exit $?.exitstatus
   end
 end
 
