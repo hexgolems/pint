@@ -6,7 +6,7 @@
 #include "../enums/enum_ipoint.h"
 
 #include "../gen_fn/lua_ins.h"
-#include "lua.h"
+#include "lua_class.h"
 #include "pin.H"
 
 extern "C" {

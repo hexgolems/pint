@@ -3,7 +3,7 @@
 #include "lua_sym.h"
 #include "../enums/enum_img_type.h"
 
-#include "lua.h"
+#include "lua_class.h"
 #include "pin.H"
 
 extern "C" {

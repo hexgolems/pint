@@ -22,7 +22,7 @@
 #include "../enums/enum_iarg_type.h"
 
 #include "../gen_fn/lua_app.h"
-#include "lua.h"
+#include "lua_class.h"
 #include "pin.H"
 
 extern "C" {
@@ -35,11 +35,11 @@ int luaopen_app (lua_State *L) {
   luaL_openlib(L, "App", app_lib, 0);
   return 1;
 }
-int app_img_tail (lua_State *L) { 
-	IMG_to_lua(L, APP_ImgTail());
-	return 1;
+int app_img_tail (lua_State *L) {
+  IMG_to_lua(L, APP_ImgTail());
+  return 1;
 }
-int app_img_head (lua_State *L) { 
-	IMG_to_lua(L, APP_ImgHead());
-	return 1;
+int app_img_head (lua_State *L) {
+  IMG_to_lua(L, APP_ImgHead());
+  return 1;
 }

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include "pin.H"
-#include "lua.h"
+#include "lua_class.h"
 #include "gen_fn/lua_img.h"
 
 

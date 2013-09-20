@@ -22,7 +22,7 @@
 #include "../enums/enum_iarg_type.h"
 
 #include "../gen_fn/lua_reg.h"
-#include "lua.h"
+#include "lua_class.h"
 #include "pin.H"
 
 extern "C" {
@@ -54,153 +54,153 @@ int luaopen_reg (lua_State *L) {
   luaL_openlib(L, "Reg", reg_lib, 0);
   return 1;
 }
-int reg_is_half32 (lua_State *L) { 
-	REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
-	BOOL r = REG_is_Half32(v1);
-	lua_pushboolean(L, r);
-	return 1;
+int reg_is_half32 (lua_State *L) {
+  REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
+  BOOL r = REG_is_Half32(v1);
+  lua_pushboolean(L, r);
+  return 1;
 }
-int reg_is_partialreg (lua_State *L) { 
-	REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
-	BOOL r = REG_is_partialreg(v1);
-	lua_pushboolean(L, r);
-	return 1;
+int reg_is_partialreg (lua_State *L) {
+  REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
+  BOOL r = REG_is_partialreg(v1);
+  lua_pushboolean(L, r);
+  return 1;
 }
-int reg_is_lower8 (lua_State *L) { 
-	REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
-	BOOL r = REG_is_Lower8(v1);
-	lua_pushboolean(L, r);
-	return 1;
+int reg_is_lower8 (lua_State *L) {
+  REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
+  BOOL r = REG_is_Lower8(v1);
+  lua_pushboolean(L, r);
+  return 1;
 }
-int reg_is_ymm (lua_State *L) { 
-	REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
-	BOOL r = REG_is_ymm(v1);
-	lua_pushboolean(L, r);
-	return 1;
+int reg_is_ymm (lua_State *L) {
+  REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
+  BOOL r = REG_is_ymm(v1);
+  lua_pushboolean(L, r);
+  return 1;
 }
-int reg_is_pin64 (lua_State *L) { 
-	REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
-	BOOL r = REG_is_pin64(v1);
-	lua_pushboolean(L, r);
-	return 1;
+int reg_is_pin64 (lua_State *L) {
+  REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
+  BOOL r = REG_is_pin64(v1);
+  lua_pushboolean(L, r);
+  return 1;
 }
-int reg_is_gr64 (lua_State *L) { 
-	REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
-	BOOL r = REG_is_gr64(v1);
-	lua_pushboolean(L, r);
-	return 1;
+int reg_is_gr64 (lua_State *L) {
+  REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
+  BOOL r = REG_is_gr64(v1);
+  lua_pushboolean(L, r);
+  return 1;
 }
-int reg_is_xmm (lua_State *L) { 
-	REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
-	BOOL r = REG_is_xmm(v1);
-	lua_pushboolean(L, r);
-	return 1;
+int reg_is_xmm (lua_State *L) {
+  REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
+  BOOL r = REG_is_xmm(v1);
+  lua_pushboolean(L, r);
+  return 1;
 }
-int reg_is_gr8 (lua_State *L) { 
-	REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
-	BOOL r = REG_is_gr8(v1);
-	lua_pushboolean(L, r);
-	return 1;
+int reg_is_gr8 (lua_State *L) {
+  REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
+  BOOL r = REG_is_gr8(v1);
+  lua_pushboolean(L, r);
+  return 1;
 }
-int reg_is_gr16 (lua_State *L) { 
-	REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
-	BOOL r = REG_is_gr16(v1);
-	lua_pushboolean(L, r);
-	return 1;
+int reg_is_gr16 (lua_State *L) {
+  REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
+  BOOL r = REG_is_gr16(v1);
+  lua_pushboolean(L, r);
+  return 1;
 }
-int reg_is_gr32 (lua_State *L) { 
-	REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
-	BOOL r = REG_is_gr32(v1);
-	lua_pushboolean(L, r);
-	return 1;
+int reg_is_gr32 (lua_State *L) {
+  REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
+  BOOL r = REG_is_gr32(v1);
+  lua_pushboolean(L, r);
+  return 1;
 }
-int reg_is_gr (lua_State *L) { 
-	REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
-	BOOL r = REG_is_gr(v1);
-	lua_pushboolean(L, r);
-	return 1;
+int reg_is_gr (lua_State *L) {
+  REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
+  BOOL r = REG_is_gr(v1);
+  lua_pushboolean(L, r);
+  return 1;
 }
-int reg_is_any_mxcsr (lua_State *L) { 
-	REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
-	BOOL r = REG_is_any_mxcsr(v1);
-	lua_pushboolean(L, r);
-	return 1;
+int reg_is_any_mxcsr (lua_State *L) {
+  REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
+  BOOL r = REG_is_any_mxcsr(v1);
+  lua_pushboolean(L, r);
+  return 1;
 }
-int reg_is_mxcsr (lua_State *L) { 
-	REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
-	BOOL r = REG_is_mxcsr(v1);
-	lua_pushboolean(L, r);
-	return 1;
+int reg_is_mxcsr (lua_State *L) {
+  REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
+  BOOL r = REG_is_mxcsr(v1);
+  lua_pushboolean(L, r);
+  return 1;
 }
-int reg_string_short (lua_State *L) { 
-	REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
-	string r = REG_StringShort(v1);
-	lua_pushstring(L, r.c_str());
-	return 1;
+int reg_string_short (lua_State *L) {
+  REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
+  string r = REG_StringShort(v1);
+  lua_pushstring(L, r.c_str());
+  return 1;
 }
-int reg_is_mm (lua_State *L) { 
-	REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
-	BOOL r = REG_is_mm(v1);
-	lua_pushboolean(L, r);
-	return 1;
+int reg_is_mm (lua_State *L) {
+  REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
+  BOOL r = REG_is_mm(v1);
+  lua_pushboolean(L, r);
+  return 1;
 }
-int reg_is_fr_or_x87 (lua_State *L) { 
-	REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
-	BOOL r = REG_is_fr_or_x87(v1);
-	lua_pushboolean(L, r);
-	return 1;
+int reg_is_fr_or_x87 (lua_State *L) {
+  REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
+  BOOL r = REG_is_fr_or_x87(v1);
+  lua_pushboolean(L, r);
+  return 1;
 }
-int reg_is_half16 (lua_State *L) { 
-	REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
-	BOOL r = REG_is_Half16(v1);
-	lua_pushboolean(L, r);
-	return 1;
+int reg_is_half16 (lua_State *L) {
+  REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
+  BOOL r = REG_is_Half16(v1);
+  lua_pushboolean(L, r);
+  return 1;
 }
-int reg_corresponding_ymm_reg (lua_State *L) { 
-	REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
-	string r = lookup_reg_to_string(L,REG_corresponding_ymm_reg(v1));
-	lua_pushstring(L, r.c_str());
-	return 1;
+int reg_corresponding_ymm_reg (lua_State *L) {
+  REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
+  string r = lookup_reg_to_string(L,REG_corresponding_ymm_reg(v1));
+  lua_pushstring(L, r.c_str());
+  return 1;
 }
-int reg_is_fr_for_get_context (lua_State *L) { 
-	REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
-	BOOL r = REG_is_fr_for_get_context(v1);
-	lua_pushboolean(L, r);
-	return 1;
+int reg_is_fr_for_get_context (lua_State *L) {
+  REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
+  BOOL r = REG_is_fr_for_get_context(v1);
+  lua_pushboolean(L, r);
+  return 1;
 }
-int reg_is_fr (lua_State *L) { 
-	REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
-	BOOL r = REG_is_fr(v1);
-	lua_pushboolean(L, r);
-	return 1;
+int reg_is_fr (lua_State *L) {
+  REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
+  BOOL r = REG_is_fr(v1);
+  lua_pushboolean(L, r);
+  return 1;
 }
-int reg_is_upper8 (lua_State *L) { 
-	REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
-	BOOL r = REG_is_Upper8(v1);
-	lua_pushboolean(L, r);
-	return 1;
+int reg_is_upper8 (lua_State *L) {
+  REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
+  BOOL r = REG_is_Upper8(v1);
+  lua_pushboolean(L, r);
+  return 1;
 }
-int reg_is_any_x87 (lua_State *L) { 
-	REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
-	BOOL r = REG_is_any_x87(v1);
-	lua_pushboolean(L, r);
-	return 1;
+int reg_is_any_x87 (lua_State *L) {
+  REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
+  BOOL r = REG_is_any_x87(v1);
+  lua_pushboolean(L, r);
+  return 1;
 }
-int reg_is_seg (lua_State *L) { 
-	REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
-	BOOL r = REG_is_seg(v1);
-	lua_pushboolean(L, r);
-	return 1;
+int reg_is_seg (lua_State *L) {
+  REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
+  BOOL r = REG_is_seg(v1);
+  lua_pushboolean(L, r);
+  return 1;
 }
-int reg_is_br (lua_State *L) { 
-	REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
-	BOOL r = REG_is_br(v1);
-	lua_pushboolean(L, r);
-	return 1;
+int reg_is_br (lua_State *L) {
+  REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
+  BOOL r = REG_is_br(v1);
+  lua_pushboolean(L, r);
+  return 1;
 }
-int reg_full_reg_name (lua_State *L) { 
-	REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
-	string r = lookup_reg_to_string(L,REG_FullRegName(v1));
-	lua_pushstring(L, r.c_str());
-	return 1;
+int reg_full_reg_name (lua_State *L) {
+  REG v1 = lookup_string_to_reg(L,lua_tostring(L,1));
+  string r = lookup_reg_to_string(L,REG_FullRegName(v1));
+  lua_pushstring(L, r.c_str());
+  return 1;
 }

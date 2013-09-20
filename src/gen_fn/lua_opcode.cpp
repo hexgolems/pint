@@ -22,7 +22,7 @@
 #include "../enums/enum_iarg_type.h"
 
 #include "../gen_fn/lua_opcode.h"
-#include "lua.h"
+#include "lua_class.h"
 #include "pin.H"
 
 extern "C" {
@@ -35,9 +35,9 @@ int luaopen_opcode (lua_State *L) {
   luaL_openlib(L, "Opcode", opcode_lib, 0);
   return 1;
 }
-int opcode_string_short (lua_State *L) { 
-	UINT32 v1 = lua_tonumber(L,1);
-	string r = OPCODE_StringShort(v1);
-	lua_pushstring(L, r.c_str());
-	return 1;
+int opcode_string_short (lua_State *L) {
+  UINT32 v1 = lua_tonumber(L,1);
+  string r = OPCODE_StringShort(v1);
+  lua_pushstring(L, r.c_str());
+  return 1;
 }

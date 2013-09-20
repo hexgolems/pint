@@ -6,7 +6,7 @@
 #include "../enums/enum_sec_type.h"
 
 #include "../gen_fn/lua_sec.h"
-#include "lua.h"
+#include "lua_class.h"
 #include "pin.H"
 
 extern "C" {

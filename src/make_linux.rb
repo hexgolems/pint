@@ -6,7 +6,7 @@ $name = "runner"
 $tool = $name
 $enums =Dir.glob("src/enums/*.cpp").map{|x| x.gsub(/(.cpp|src\/)/,"")}
 $fns =Dir.glob("src/gen_fn/*.cpp").map{|x| x.gsub(/(.cpp|src\/)/,"")}
-$files= %w{runner lua lua_callback pintool_defines}+$enums+$fns
+$files= %w{runner lua_class lua_callback pintool_defines}+$enums+$fns
 $pin_path="./pin/"
 $lua_path="./lua/"
 $pin_include_paths = %w{InstLib source/include/pin source/include/pin/gen extras/components/include extras/xed2-intel64/include }
@@ -100,7 +100,8 @@ def setup
 end
 
 def clean
-  sh("rm","-r","output")
+  try_sh("rm","-r","output")
+  try_sh("rm","-r","runner.so")
 end
 
 def sh(*cmd)

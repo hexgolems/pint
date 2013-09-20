@@ -22,7 +22,7 @@
 #include "../enums/enum_iarg_type.h"
 
 #include "../gen_fn/lua_trace.h"
-#include "lua.h"
+#include "lua_class.h"
 #include "pin.H"
 
 extern "C" {

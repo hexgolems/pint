@@ -22,7 +22,7 @@
 #include "../enums/enum_iarg_type.h"
 
 #include "../gen_fn/lua_sym.h"
-#include "lua.h"
+#include "lua_class.h"
 #include "pin.H"
 
 extern "C" {
@@ -54,49 +54,49 @@ int luaopen_sym (lua_State *L) {
   luaL_openlib(L, "Sym", sym_lib, 0);
   return 1;
 }
-int sym_next (lua_State *L) { 
-	SYM* v1 = check_sym(L,1);
-	SYM_to_lua(L, SYM_Next(*v1));
-	return 1;
+int sym_next (lua_State *L) {
+  SYM* v1 = check_sym(L,1);
+  SYM_to_lua(L, SYM_Next(*v1));
+  return 1;
 }
-int sym_i_func (lua_State *L) { 
-	SYM* v1 = check_sym(L,1);
-	BOOL r = SYM_IFunc(*v1);
-	lua_pushboolean(L, r);
-	return 1;
+int sym_i_func (lua_State *L) {
+  SYM* v1 = check_sym(L,1);
+  BOOL r = SYM_IFunc(*v1);
+  lua_pushboolean(L, r);
+  return 1;
 }
-int sym_name (lua_State *L) { 
-	SYM* v1 = check_sym(L,1);
-	string r = SYM_Name(*v1);
-	lua_pushstring(L, r.c_str());
-	return 1;
+int sym_name (lua_State *L) {
+  SYM* v1 = check_sym(L,1);
+  string r = SYM_Name(*v1);
+  lua_pushstring(L, r.c_str());
+  return 1;
 }
-int sym_prev (lua_State *L) { 
-	SYM* v1 = check_sym(L,1);
-	SYM_to_lua(L, SYM_Prev(*v1));
-	return 1;
+int sym_prev (lua_State *L) {
+  SYM* v1 = check_sym(L,1);
+  SYM_to_lua(L, SYM_Prev(*v1));
+  return 1;
 }
-int sym_address (lua_State *L) { 
-	SYM* v1 = check_sym(L,1);
-	ADDRINT r = SYM_Address(*v1);
-	lua_pushnumber(L, r);
-	return 1;
+int sym_address (lua_State *L) {
+  SYM* v1 = check_sym(L,1);
+  ADDRINT r = SYM_Address(*v1);
+  lua_pushnumber(L, r);
+  return 1;
 }
-int sym_index (lua_State *L) { 
-	SYM* v1 = check_sym(L,1);
-	UINT32 r = SYM_Index(*v1);
-	lua_pushnumber(L, r);
-	return 1;
+int sym_index (lua_State *L) {
+  SYM* v1 = check_sym(L,1);
+  UINT32 r = SYM_Index(*v1);
+  lua_pushnumber(L, r);
+  return 1;
 }
-int sym_value (lua_State *L) { 
-	SYM* v1 = check_sym(L,1);
-	ADDRINT r = SYM_Value(*v1);
-	lua_pushnumber(L, r);
-	return 1;
+int sym_value (lua_State *L) {
+  SYM* v1 = check_sym(L,1);
+  ADDRINT r = SYM_Value(*v1);
+  lua_pushnumber(L, r);
+  return 1;
 }
-int sym_dynamic (lua_State *L) { 
-	SYM* v1 = check_sym(L,1);
-	BOOL r = SYM_Dynamic(*v1);
-	lua_pushboolean(L, r);
-	return 1;
+int sym_dynamic (lua_State *L) {
+  SYM* v1 = check_sym(L,1);
+  BOOL r = SYM_Dynamic(*v1);
+  lua_pushboolean(L, r);
+  return 1;
 }
