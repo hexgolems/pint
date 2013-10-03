@@ -11,7 +11,6 @@ using namespace std;
 
 Lua lua;
 
-KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "runner.out", "specify output file name");
 KNOB<string> KnobScriptFile(KNOB_MODE_WRITEONCE, "pintool", "s", "tools/strings.lua", "specify the lua script to be run");
 
 INT32 Usage()
